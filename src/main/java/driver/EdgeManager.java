@@ -20,6 +20,7 @@ public class EdgeManager extends BrowserFactory{
 		edgeoptions.addArguments("--start-maximized");
 		edgeoptions.addArguments("--disable-infobars");
 		edgeoptions.addArguments("--disable-notifications");
+		edgeoptions.addArguments("--remote-allow-origins=*");
         return edgeoptions;
 	}
 }

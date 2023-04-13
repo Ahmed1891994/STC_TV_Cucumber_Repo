@@ -139,11 +139,11 @@
 			<artifactId>owner</artifactId>
 			<version>1.0.12</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-testng -->
+		<!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-cucumber7-jvm -->
 		<dependency>
 			<groupId>io.qameta.allure</groupId>
-			<artifactId>allure-testng</artifactId>
-			<version>2.20.1</version>
+			<artifactId>allure-cucumber7-jvm</artifactId>
+			<version>2.21.0</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
 		<dependency>
@@ -218,6 +218,12 @@
 			<artifactId>lombok</artifactId>
 			<version>1.18.24</version>
 			<optional>true</optional>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20230227</version>
 		</dependency>
 	</dependencies>
 </project>

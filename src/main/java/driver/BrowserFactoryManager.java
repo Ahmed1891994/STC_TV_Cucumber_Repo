@@ -13,15 +13,15 @@ public class BrowserFactoryManager {
 	private Map<String, BrowserFactory> map = new HashMap<>();
 	
 	{
-		map.put("chrome",Chrome);
-		map.put("edge",Edge);
-		map.put("firefox",Firefox);	
+		map.put("Chrome",Chrome);
+		map.put("Edge",Edge);
+		map.put("Firefox",Firefox);	
 	}
 	
 	public BrowserFactory get(String param)
 	{
-		MyLogger.info("get the browser Manager from the parameter passed -> " + param.toLowerCase());
-		return map.get(param.toLowerCase());
+		MyLogger.info("get the browser Manager from the parameter passed -> " + param);
+		return map.get(param);
 
 	}
 }
