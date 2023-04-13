@@ -1,9 +1,10 @@
-# 📝Selenium JAVA Test Automation Framework
+# 📝Cucumber JAVA Test Automation Framework
 - This project is an open-source Test automation Framework that allows you to perform multiple actions to test a web application's functionality, behaviour, 
 which provides easy to use syntax, and easy to setup environment according to the needed requirements for testing
-- This project is based on Selenium WebDriver, TestNG Runner, and Maven
+- This project is based on Cucumber , Selenium WebDriver, TestNG Runner, and Maven
 
 ## 📝Features
+- Support BDD
 - Support Running Testing on Following Browsers: Chrome, Firefox, & Edge
 - Support Cross-Browsing Mode
 - Support Running on Selenium Grid
@@ -29,7 +30,8 @@ Website URL: [herokuapp](https://the-internet.herokuapp.com/)
 
 ## 📝 The main Frameworks included in the project:
 * Page Object Model (POM) design pattern
-* TESTNG as testing framework
+* Factory Design Pattern
+* Solid Principals
 
 ## 📝 Framework  covers
 * The URL and Browser Configuration are defined in the respective settings.properties
