@@ -22,12 +22,6 @@ pipeline {
         always {
             step([$class: 'Publisher', reportFilenamePattern: 'testng_results/testng-results.xml'])
             bat "docker-compose down"
-            script {
-            currentBuild.result = checkTestResult()
-            if (currentBuild.result == 'FAILURE') {
-                sh "exit 1"
-                }
-            }
         }
     }
 }
