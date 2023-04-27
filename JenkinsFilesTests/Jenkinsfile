@@ -26,7 +26,8 @@ pipeline {
             currentBuild.result = checkTestResult()
             if (currentBuild.result == 'FAILURE') {
                 sh "exit 1"
-        }
+                }
+            }
         }
     }
 }
