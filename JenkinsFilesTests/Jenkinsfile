@@ -20,7 +20,7 @@ pipeline {
     }
     post {
         always {
-            cucumber buildStatus: 'null', customCssFiles: '', customJsFiles: '', failedFeaturesNumber: 0, failedScenariosNumber: 0, failedStepsNumber: 0, fileIncludePattern: '**/*.json', jsonReportDirectory: '', pendingStepsNumber: 0, skippedStepsNumber: 0, sortingMethod: 'ALPHABETICAL', undefinedStepsNumber: 0
+            step([$class: 'Publisher', reportFilenamePattern: 'testng_results/testng-results.xml'])
             bat "docker-compose down"
             script {
             currentBuild.result = checkTestResult()
