@@ -20,8 +20,13 @@ pipeline {
     }
     post {
         always {
-            cucumber buildStatus: 'null', customCssFiles: '', customJsFiles: '', failedFeaturesNumber: -1, failedScenariosNumber: -1, failedStepsNumber: -1, fileIncludePattern: '**/*.json', jsonReportDirectory: 'target', pendingStepsNumber: -1, skippedStepsNumber: -1, sortingMethod: 'ALPHABETICAL', undefinedStepsNumber: -1
+            cucumber buildStatus: 'null', customCssFiles: '', customJsFiles: '', failedFeaturesNumber: 0, failedScenariosNumber: 0, failedStepsNumber: 0, fileIncludePattern: '**/*.json', jsonReportDirectory: '', pendingStepsNumber: 0, skippedStepsNumber: 0, sortingMethod: 'ALPHABETICAL', undefinedStepsNumber: 0
             bat "docker-compose down"
+            script {
+            currentBuild.result = checkTestResult()
+            if (currentBuild.result == 'FAILURE') {
+                sh "exit 1"
+        }
         }
     }
 }
