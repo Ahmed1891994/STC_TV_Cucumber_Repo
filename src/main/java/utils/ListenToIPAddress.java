@@ -3,7 +3,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class ListenToIPAddress {
-	public String GetMyIpAddress() throws UnknownHostException
+	public String getMyIpAddress() throws UnknownHostException
 	{	
 		String result = System.getProperty("HUBHOST");
 		if(result == null)

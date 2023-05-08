@@ -2,26 +2,25 @@ package driver;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import utils.MyLogger;
 
 
 public class BrowserFactoryManager {
-	private BrowserFactory Chrome = new ChromeManager();
-	private BrowserFactory Edge =  new EdgeManager();
-	private BrowserFactory Firefox =  new FireFoxManager();
+	private BrowserFactory chrome = new ChromeManager();
+	private BrowserFactory edge =  new EdgeManager();
+	private BrowserFactory firefox =  new FireFoxManager();
 	private Map<String, BrowserFactory> map = new HashMap<>();
 	
+	public BrowserFactoryManager()
 	{
-		map.put("Chrome",Chrome);
-		map.put("Edge",Edge);
-		map.put("Firefox",Firefox);	
+		map.put("Chrome",chrome);
+		map.put("Edge",edge);
+		map.put("Firefox",firefox);	
 	}
 	
 	public BrowserFactory get(String param)
 	{
 		MyLogger.info("get the browser Manager from the parameter passed -> " + param);
 		return map.get(param);
-
 	}
 }

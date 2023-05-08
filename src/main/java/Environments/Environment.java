@@ -1,4 +1,4 @@
-package Environments;
+package environments;
 
 import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Config.Sources;

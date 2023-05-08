@@ -17,15 +17,15 @@ public class BrowserActions {
 
 	// ************************************URLNavigation**********************************************
 	// open url using navigate to track history
-	public void openURL_History(String URL) {
-		MyLogger.info("navigate to : " + URL);
-		driver.navigate().to(URL);
+	public void openURLHistory(String url) {
+		MyLogger.info("navigate to : " + url);
+		driver.navigate().to(url);
 	}
 
 	// open url using get() and not care about history
-	public void openURL(String URL) {
-		MyLogger.info("Open URL : " + URL);
-		driver.get(URL);
+	public void openURL(String url) {
+		MyLogger.info("Open URL : " + url);
+		driver.get(url);
 	}
 
 	// refresh page

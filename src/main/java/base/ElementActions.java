@@ -25,7 +25,8 @@ import utils.MyLogger;
 public class ElementActions {
 	private WebDriver driver;
 	WebDriverWait wait;
-
+	private static final String WAIT_DONE = "Wait Done";
+	private static final String WAIT_ELEMENT_BE_VISIBLE = "Wait Element to be Visible";
 	public ElementActions(WebDriver driver) {
 		this.driver = driver;
 		wait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -39,7 +40,7 @@ public class ElementActions {
 	}
 
 	// Get title from page
-	public String TitleGet() {
+	public String titleGet() {
 		String result = driver.getTitle();
 		MyLogger.info("Get Title String : " + result);
 		return result;
@@ -68,7 +69,7 @@ public class ElementActions {
 	}
 
 	// select checkbox
-	public void SelectCheckbox(By element) {
+	public void selectCheckbox(By element) {
 		MyLogger.info("Check if element is not selected");
 		if (!driver.findElement(element).isSelected()) {
 			MyLogger.info("element is not selected --> Select Element");
@@ -77,7 +78,7 @@ public class ElementActions {
 	}
 
 	// deselect checkbox
-	public void DeselectCheckbox(By element) {
+	public void deSelectCheckbox(By element) {
 		MyLogger.info("Check if element is selected");
 		if (driver.findElement(element).isSelected()) {
 			MyLogger.info("element is selected --> Unselect Element");
@@ -87,7 +88,7 @@ public class ElementActions {
 	}
 
 	// select checkbox
-	public void ActionClick(By element) {
+	public void actionClick(By element) {
 		MyLogger.info("Wait Element to be Visible and Clickable");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		wait.until(ExpectedConditions.elementToBeClickable(element));
@@ -96,7 +97,7 @@ public class ElementActions {
 		act.moveToElement(driver.findElement(element)).click().perform();
 	}
 
-	public void ScrollToElement(By element) {
+	public void scrollToElement(By element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		MyLogger.info("Scroll To Element");
 		js.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(element));
@@ -105,7 +106,7 @@ public class ElementActions {
 	// ****************************************DropBox************************************************
 	// Select from dropBox
 	public void selectByVisibleText(By element, String text) {
-		MyLogger.info("Wait Element to be Visible");
+		MyLogger.info(WAIT_ELEMENT_BE_VISIBLE);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		MyLogger.info("Select Element in dropdown by visible text : " + text);
 		Select dropbox = new Select(driver.findElement(element));
@@ -113,7 +114,7 @@ public class ElementActions {
 	}
 
 	public void selectByValue(By element, String value) {
-		MyLogger.info("Wait Element to be Visible");
+		MyLogger.info(WAIT_ELEMENT_BE_VISIBLE);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		MyLogger.info("Select Element in dropdown by Value : " + value);
 		Select dropbox = new Select(driver.findElement(element));
@@ -121,7 +122,7 @@ public class ElementActions {
 	}
 
 	public void selectByIndex(By element, int index) {
-		MyLogger.info("Wait Element to be Visible");
+		MyLogger.info(WAIT_ELEMENT_BE_VISIBLE);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		MyLogger.info("Select Element in dropdown by Index : " + index);
 		Select dropbox = new Select(driver.findElement(element));
@@ -129,7 +130,7 @@ public class ElementActions {
 	}
 
 	public String getFirstSelectiontxt(By element) {
-		MyLogger.info("Wait Element to be Visible");
+		MyLogger.info(WAIT_ELEMENT_BE_VISIBLE);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		MyLogger.info("getFirstSelection");
 		Select dropbox = new Select(driver.findElement(element));
@@ -139,7 +140,7 @@ public class ElementActions {
 	// ***************************************TextFields**********************************************
 	// put text in field after clearing it
 	public void textSet(By element, String text) {
-		MyLogger.info("Wait Element to be Visible");
+		MyLogger.info(WAIT_ELEMENT_BE_VISIBLE);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		MyLogger.info("Clear text in Field");
 		driver.findElement(element).clear();
@@ -149,7 +150,7 @@ public class ElementActions {
 
 	// Get text from element
 	public String textGet(By element) {
-		MyLogger.info("Wait Element to be Visible");
+		MyLogger.info(WAIT_ELEMENT_BE_VISIBLE);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		String result = driver.findElement(element).getText();
 		MyLogger.info("Text Returned from element is : " + result);
@@ -157,8 +158,8 @@ public class ElementActions {
 	}
 
 	// Get text from element
-	public String[] AlltextGet(By element) {
-		MyLogger.info("Wait Element to be Visible");
+	public String[] allTextGet(By element) {
+		MyLogger.info(WAIT_ELEMENT_BE_VISIBLE);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		List<WebElement> labels = driver.findElements(element);
 		String[] labelTexts = new String[labels.size()];
@@ -231,7 +232,7 @@ public class ElementActions {
 	// ************************************Element
 	// Attributes***************************************
 	public String getCSSValue(By element, String parameter) {
-		MyLogger.info("Wait Element to be Visible");
+		MyLogger.info(WAIT_ELEMENT_BE_VISIBLE);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		String result = driver.findElement(element).getCssValue(parameter);
 		MyLogger.info("Get Element CSS value for parameter " + parameter + " -> " + result);
@@ -239,27 +240,27 @@ public class ElementActions {
 	}
 
 	// *********************************Wait****************************************
-	public void Wait_Implicit(int timer) {
+	public void waitImplicit(int timer) {
 		MyLogger.info("Wait implicitly for " + timer + " seconds ");
 		new WebDriverWait(driver, Duration.ofSeconds(timer));
-		MyLogger.info("Wait Done");
+		MyLogger.info(WAIT_DONE);
 	}
 
-	public void Wait_Explicit_Until_Visibility(By element) {
+	public void waitExplicitUntilVisibility(By element) {
 		MyLogger.info("Wait Explicitly Until element is visible");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(element));
-		MyLogger.info("Wait Done");
+		MyLogger.info(WAIT_DONE);
 	}
 
-	public void Wait_Explicit_Until_NonVisibility(By element) {
+	public void waitExplicitUntilNonVisibility(By element) {
 		MyLogger.info("Wait Explicitly Until element is invisible");
 		wait.until(ExpectedConditions.invisibilityOf(driver.findElement(element)));
-		MyLogger.info("Wait Done");
+		MyLogger.info(WAIT_DONE);
 	}
 
 	// ************************************Screenshots***************************************
 	@Attachment(value = "Page screenshot", type = "image/png")
-	public byte[] takeScreenShot(String TestMethodName, WebDriver driver) {
+	public byte[] takeScreenShot(String testmethodname, WebDriver driver) {
 		TakesScreenshot ts = (TakesScreenshot) driver;
 		MyLogger.info("Save screen shot");
 		File source = ts.getScreenshotAs(OutputType.FILE);
@@ -267,7 +268,7 @@ public class ElementActions {
 		String date = java.time.LocalDate.now().toString();
 		MyLogger.info("Save screen shot name with time -> " + time + " and date -> " + date);
 		String destination = System.getProperty("user.dir") + "\\ScreenShots\\" + date + "_" + time + "\\"
-				+ TestMethodName + "_" + ThreadLocalRandom.current().nextInt() + ".png";
+				+ testmethodname + "_" + ThreadLocalRandom.current().nextInt() + ".png";
 
 		try {
 			MyLogger.info("copy screen shot to destination place : " + destination);

@@ -6,19 +6,21 @@ import java.net.UnknownHostException;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import base.Base;
+import base.TestSetupContext;
 import utils.ListenToIPAddress;
 import utils.MyLogger;
 
-public class RemoteManager extends Base{
+public class RemoteManager{
 	private String ip;
 	private String port;
+	private TestSetupContext testsetupcontext;
 	
-	public RemoteManager() {
+	public RemoteManager(TestSetupContext testsetupcontext) {
 		try {
-			port = getEnvironment().getgridport();
+			this.testsetupcontext = testsetupcontext;
+			port = this.testsetupcontext.getEnvironment().getgridport();
 			MyLogger.info("get port from Environment variable with value : " + port);
-			ip = new ListenToIPAddress().GetMyIpAddress();
+			ip = new ListenToIPAddress().getMyIpAddress();
 			MyLogger.info("get port from Environment variable or current Host with value : " + ip);
 		} catch (UnknownHostException e) {
 			MyLogger.error("there is UnknownHostException issue Please Investegate this");

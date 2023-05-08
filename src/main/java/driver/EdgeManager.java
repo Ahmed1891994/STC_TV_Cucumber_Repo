@@ -8,7 +8,7 @@ import utils.MyLogger;
 
 public class EdgeManager extends BrowserFactory{
 	@Override
-	public WebDriver Driversetup() {
+	public WebDriver driverSetup() {
 		WebDriverManager.edgedriver().setup();
 		return new EdgeDriver(getOptions());
 	}

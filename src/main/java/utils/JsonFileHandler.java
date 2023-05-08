@@ -1,6 +1,4 @@
 package utils;
-
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -18,16 +16,12 @@ public class JsonFileHandler {
 			InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
 			JSONTokener tokener = new JSONTokener(inputStreamReader);
 			jsonObject = new JSONObject(tokener);
-		} catch (Exception e) {
-			MyLogger.error("Error loading JSON file: " + resourceName);
-		} finally {
 			if (inputStream != null) {
-				try {
-					inputStream.close();
-				} catch (IOException e) {
-					MyLogger.error("Error closing input stream for JSON file: " + resourceName);
-				}
+				inputStream.close();
 			}
+		} 
+		catch (Exception e) {
+			MyLogger.error("Error loading JSON file: " + resourceName);
 		}
 		return jsonObject;
 	}

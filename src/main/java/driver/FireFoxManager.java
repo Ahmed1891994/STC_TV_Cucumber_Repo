@@ -9,7 +9,7 @@ import utils.MyLogger;
 public class FireFoxManager extends BrowserFactory{
 	
 	@Override
-	protected WebDriver Driversetup() {
+	protected WebDriver driverSetup() {
 		WebDriverManager.firefoxdriver().setup();
 		return new FirefoxDriver(getOptions());
 	}

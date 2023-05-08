@@ -1,17 +1,31 @@
 package utils;
 
 public class ConfigReader {
-	private static String browserType = null;
-	public static void setBrowserType(String browser)
-	{
-		browserType = browser;
+	private ThreadLocal<String> browserType = new ThreadLocal<>();
+	public void setBrowserType(String browser) {
+		if (browser != null && browser.length() <= 12) {
+			browserType.set(browser);
+			MyLogger.info("save Browser type => " + browser);
+		}
+		else
+		{
+			MyLogger.error("No browser is saved");
+		}
+	}
+
+	public String getBrowserType() {
+		String result = browserType.get();
+		if (result == null) {
+			MyLogger.info("Browser is null");
+			result = System.getProperty("browser", "Chrome");
+			MyLogger.info("get Browser type" + result);
+			browserType.set(result);
+		}
+		return result;
 	}
 	
-	public static String getBrowserType()
-	{
-		if(browserType != null)
-			return browserType;
-		else
-			throw new RuntimeException("browser not specified");
-	}
+	public void clearBrowserType() {
+        browserType.remove();
+        MyLogger.info("Browser type is cleared");
+    }
 }

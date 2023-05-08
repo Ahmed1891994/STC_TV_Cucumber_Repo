@@ -2,53 +2,56 @@ package pages;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
-import base.Base;
 import io.qameta.allure.Step;
+import base.TestSetupContext;
 import utils.MyLogger;
 
-public class StcTvPlanPage extends Base {
-	private By countrylist_btn = By.id("country-name");
-	private By price_lbl = By.xpath("//div[@class='plan-names']/descendant::div[@class='price']");
-	private By plans_lbl = By.xpath("//div[@class='plan-names']/descendant::strong[@class='plan-title']");
-	private By close_ntn = By.id("country-poppup-close");
+public class StcTvPlanPage {
+	private By countrylistbtn = By.id("country-name");
+	private By pricelbl = By.xpath("//div[@class='plan-names']/descendant::div[@class='price']");
+	private By planslbl = By.xpath("//div[@class='plan-names']/descendant::strong[@class='plan-title']");
+	private By closebtn = By.id("country-poppup-close");
+	private TestSetupContext testsetupcontext;
+	
+	public StcTvPlanPage(TestSetupContext testsetupcontext)
+	{
+		this.testsetupcontext = testsetupcontext;
+	}
 	
 	@Step("Open Country List step ...")
-	public void OpenCountryList() {
+	public void openCountryList() {
 		MyLogger.info("User wants to open Country list");
-		getElementActions().clickOn(countrylist_btn);	
+		testsetupcontext.getElementActions().clickOn(countrylistbtn);	
 	}
 
 	@Step("Checking current Country step ...")
-	public Boolean CheckCurrentCountryIs(String country)
+	public Boolean checkCurrentCountryIs(String country)
 	{
 		MyLogger.info("Checking if current country is " + country);
-		return getElementActions().textGet(By.xpath("//span[@id='country-name']")).trim().equals(country);
+		return testsetupcontext.getElementActions().textGet(By.xpath("//span[@id='country-name']")).trim().equals(country);
 	}
 	
 	@Step("Choose Country from List step ...")
-	public void ChooseCountryFlow(String country)
-	{	
-		if(!CheckCurrentCountryIs(country))
-		{
+	public void chooseCountryFlow(String country){	
+		if (Boolean.FALSE.equals(checkCurrentCountryIs(country))){
 			MyLogger.info("User wants to Choose Country");
-			getElementActions().clickOn(By.xpath("//div[@id='country-selct']/descendant::span[contains(text(),'"+country+"')]"));
-		}else
-		{
-			CloseCountryList();
+			testsetupcontext.getElementActions().clickOn(By.xpath("//div[@id='country-selct']/descendant::span[contains(text(),'"+country+"')]"));
+		}else {
+			closeCountryList();
 		}
 	}
 	
 	@Step("Close Country List step ...")
-	public void CloseCountryList()
+	public void closeCountryList()
 	{	
 		MyLogger.info("Close country List");
-		getElementActions().clickOn(close_ntn);
+		testsetupcontext.getElementActions().clickOn(closebtn);
 	}
 	
 	@Step("get Actual Prices step ...")
 	public String[] getActualPrices(String countrykey)
 	{			
-		String[] result = getElementActions().AlltextGet(price_lbl);
+		String[] result = testsetupcontext.getElementActions().allTextGet(pricelbl);
 		for( int i = 0 ; i < result.length ; i++)
 		{
 			result[i] = result[i].split(" ")[0];
@@ -60,7 +63,7 @@ public class StcTvPlanPage extends Base {
 	@Step("get Actual plans step ...")
 	public String[] getActualPlans(String countrykey)
 	{			
-		String[] result = getElementActions().AlltextGet(plans_lbl);
+		String[] result = testsetupcontext.getElementActions().allTextGet(planslbl);
 		MyLogger.info("Actual plans is " + String.join(", ", result));
 		return result;
 	}
@@ -68,14 +71,14 @@ public class StcTvPlanPage extends Base {
 	@Step("get Actual Currency step ...")
 	public String getActualCurrency(String countrykey)
 	{			
-		String result = getElementActions().textGet(price_lbl).split(" ")[1].split("/")[0];
+		String result = testsetupcontext.getElementActions().textGet(pricelbl).split(" ")[1].split("/")[0];
 		MyLogger.info("Actual Currency for country " + countrykey + " is " + result);
 		return result;
 	}
 	
 	@Step("get Expected Prices step ...")
 	public String[] getExpectedPrices(String countrykey) {
-	    JSONArray typeData = countriesdata.getJSONObject(countrykey).getJSONArray("type");
+	    JSONArray typeData = testsetupcontext.getCountriesData().getJSONObject(countrykey).getJSONArray("type");
 	    String[] prices = new String[typeData.length()];
 	    for (int i = 0; i < typeData.length(); i++) {
 	        JSONObject typeObject = typeData.getJSONObject(i);
@@ -87,7 +90,7 @@ public class StcTvPlanPage extends Base {
 	
 	@Step("get Expected Plans step ...")
 	public String[] getExpectedPlans(String countrykey) {
-		JSONArray typeData = countriesdata.getJSONObject(countrykey).getJSONArray("type");
+		JSONArray typeData = testsetupcontext.getCountriesData().getJSONObject(countrykey).getJSONArray("type");
 		String[] plans = new String[typeData.length()];
 		for (int i = 0; i < typeData.length(); i++) {
 	        JSONObject typeObject = typeData.getJSONObject(i);
@@ -99,7 +102,7 @@ public class StcTvPlanPage extends Base {
 	
 	@Step("get Expected Currency step ...")
 	public String getExpectedCurrency(String countrykey) {
-		JSONObject countryData = countriesdata.getJSONObject(countrykey);
+		JSONObject countryData = testsetupcontext.getCountriesData().getJSONObject(countrykey);
 	    String currency = countryData.getString("Currency");
 	    MyLogger.info("Expected currency for country " + countrykey + " is " + currency);
 	    return currency;

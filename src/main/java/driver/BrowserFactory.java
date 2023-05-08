@@ -7,7 +7,7 @@ import utils.MyLogger;
 
 public abstract class BrowserFactory {
 	protected WebDriver driver;
-	protected abstract WebDriver Driversetup();
+	protected abstract WebDriver driverSetup();
 	
 	public WebDriver getDriver()
 	{
@@ -15,7 +15,7 @@ public abstract class BrowserFactory {
 		if(driver == null)
 		{
 			MyLogger.info("driver is null then setup driver");
-			driver = Driversetup();
+			driver = driverSetup();
 		}	
 		return driver;
 	}

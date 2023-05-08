@@ -89,18 +89,20 @@
 					<suiteXmlFiles>
 						<suiteXmlFile>testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
-					<properties>
-						<property>
-							<name>dataproviderthreadcount</name>
-							<value>3</value>
-						</property>
-					</properties>
+					<parallel>tests</parallel>
+					<threadCount>3</threadCount>
+					<useUnlimitedThreads>true</useUnlimitedThreads>
 					<systemPropertyVariables>
 						<!-- this is log file locations, to be retrived using system.getproperty(log.directory) -->
 						<log.directory>${project.basedir}\Output\${maven.build.timestamp}\Logs\</log.directory>
+						<!--<allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+						<allure.link.issue.pattern>https://dev.azure.com/sseenivasan89/My%20Project/_workitems/edit/{}</allure.link.issue.pattern>
+						<allure.link.tms.pattern>https://example.org/browse/{}</allure.link.tms.pattern>-->
+
 					</systemPropertyVariables>
 					<argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.9.1/aspectjweaver-1.9.9.1.jar"
+                    	-Dcucumber.options="--plugin io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
                     </argLine>
 				</configuration>
 			</plugin>
@@ -111,7 +113,7 @@
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>7.4.0</version>
+			<version>7.7.1</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -202,6 +204,13 @@
 			<artifactId>cucumber-testng</artifactId>
 			<version>7.11.1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-picocontainer -->
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-picocontainer</artifactId>
+			<version>7.12.0</version>
+		</dependency>
+
 		<dependency>
 			<groupId>com.aventstack</groupId>
 			<artifactId>extentreports</artifactId>

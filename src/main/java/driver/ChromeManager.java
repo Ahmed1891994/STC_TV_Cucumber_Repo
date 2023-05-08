@@ -9,7 +9,7 @@ import utils.MyLogger;
 
 public class ChromeManager extends BrowserFactory{
 	@Override
-	protected WebDriver Driversetup() {
+	protected WebDriver driverSetup() {
 		WebDriverManager.chromedriver().setup();
 		return new ChromeDriver(getOptions());
 	}
