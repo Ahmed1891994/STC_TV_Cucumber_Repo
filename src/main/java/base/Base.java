@@ -2,7 +2,8 @@ package base;
 
 import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
-import Environments.Environment;
+
+import environments.Environment;
 import utils.MyLogger;
 
 public class Base{
